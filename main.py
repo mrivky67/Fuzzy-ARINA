@@ -316,70 +316,66 @@ class Selada:
         )
 
 
-tes = Selada()
-tes.getKategoriUmur(12)
-tes.view()
-
 # selada = Selada()
 # umur_selada = selada.getKategoriUmur(12)
 # ppm_selada = selada.GetPPM(umur_selada, 452)
 # selada.view()
 # plt.show()
 # print(f"{umur_selada} , {ppm_selada}")
-# app = Flask(__name__)
-# selada = Selada()
+app = Flask(__name__)
+selada = Selada()
 
 
-# # Variabel untuk menyimpan data
-# processed_data = {}
+# Variabel untuk menyimpan data
+processed_data = {}
 
 
-# @app.route("/start", methods=["POST"])
-# def start():
-#     data = request.json
-#     tanaman = data.get("tanaman")
-#     umur = data.get("umur")
+@app.route("/start", methods=["POST"])
+def start():
+    data = request.json
+    tanaman = data.get("tanaman")
+    umur = data.get("umur")
 
-#     if tanaman is None or umur is None:
-#         return (
-#             jsonify({"error": "Mohon sertakan tanaman dan umur dalam permintaan"}),
-#             400,
-#         )
-#     global processed_data
-#     processed_data = {"tanaman": tanaman, "umur": umur}
+    if tanaman is None or umur is None:
+        return (
+            jsonify({"error": "Mohon sertakan tanaman dan umur dalam permintaan"}),
+            400,
+        )
+    global processed_data
+    processed_data = {"tanaman": tanaman, "umur": umur}
 
-#     return jsonify(processed_data)
-
-
-# @app.route("/get_status", methods=["POST"])
-# def get_status():
-#     global processed_data
-#     data = request.json
-#     umur = processed_data.get("umur")
-#     ppm = data.get("ppm")
-
-#     if ppm is None:
-#         return jsonify({"error": "Mohon sertakan umur dan ppm dalam permintaan"}), 400
-
-#     kategori_umur = selada.getKategoriUmur(umur)
-#     status_ppm = selada.GetPPM(kategori_umur, ppm)
-
-#     processed_data = {
-#         "kategori_umur": kategori_umur,
-#         "status_ppm": status_ppm,
-#     }
-
-#     return jsonify(processed_data)
+    return jsonify(processed_data)
 
 
-# @app.route("/get_data", methods=["GET"])
-# def get_data():
-#     if not processed_data:
-#         return jsonify({"error": "Tidak ada data yang tersedia"}), 404
+@app.route("/get_status", methods=["POST"])
+def get_status():
+    global processed_data
+    data = request.json
+    umur = processed_data.get("umur")
+    ppm = data.get("ppm")
 
-#     return jsonify(processed_data)
+    if ppm is None:
+        return jsonify({"error": "Mohon sertakan umur dan ppm dalam permintaan"}), 400
+
+    kategori_umur = selada.getKategoriUmur(umur)
+    status_ppm = selada.GetPPM(kategori_umur, ppm)
+
+    processed_data = {
+        "kategori_umur": kategori_umur,
+        "status_ppm": status_ppm,
+    }
+
+    return jsonify(processed_data)
 
 
-# # Jalankan aplikasi Flask
-# if __name__ == "__main__":
-#     app.run(debug=True)
+@app.route("/get_data", methods=["GET"])
+def get_data():
+    if not processed_data:
+        return jsonify({"error": "Tidak ada data yang tersedia"}), 404
+
+    return jsonify(processed_data)
+
+
+# Jalankan aplikasi Flask
+if __name__ == "__main__":
+    app.run(debug=True)
