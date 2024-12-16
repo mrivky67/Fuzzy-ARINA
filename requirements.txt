@@ -2,3 +2,4 @@ flask
 scikit-fuzzy
 numpy
 matplotlib
+gunicorn  # untuk deployment di server
