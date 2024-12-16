@@ -1,0 +1,5 @@
+services:
+  web:
+    env:
+      BOT_TOKEN: 6763364323:AAFSRCU-xZcZxb22yzpMAsiAhUi_KpBQhmY
+    command: python main.py
