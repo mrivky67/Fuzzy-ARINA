@@ -516,9 +516,6 @@ class NFTFuzzyControl:
             return "Error in computation. Please check input values."
 
 
-selada = Selada()
-result = selada.MainSistem("Bibit", 770, 10)
-print(result)
 
 app = Flask(__name__)
 selada = Selada()
