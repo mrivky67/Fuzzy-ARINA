@@ -588,7 +588,6 @@ def get_status():
             "status_suhu": status_suhu,
             "status_kelembaban": status_kelembaban,
             "status_ketinggian_air": status_ketinggian_air,
-            "umur": umur,
         }
     )
     return jsonify(processed_data)
