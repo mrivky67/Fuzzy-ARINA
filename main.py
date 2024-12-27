@@ -550,7 +550,7 @@ def start():
             400,
         )
     global processed_data
-    processed_data = {"tanaman": tanaman, "umur": umur}
+    processed_data.update({"tanaman": tanaman, "umur": umur})
 
     return jsonify(processed_data)
 
