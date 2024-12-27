@@ -528,7 +528,7 @@ processed_data = {}
 def evaluate():
     data = request.get_json()
     try:
-        umur = float(data["umur"])
+        umur = data["umur"]
         ppm = float(data["ppm"])
         ketinggian = float(data["ketinggian"])
 
