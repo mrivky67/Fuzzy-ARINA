@@ -12,7 +12,7 @@ class Selada:
         self.kelembaban = ctrl.Antecedent(np.arange(0, 100, 1), "kelembaban")
         self.NutrisiA = ctrl.Consequent(np.arange(0, 100, 1), "nutrisi_a")
         self.NutrisiB = ctrl.Consequent(np.arange(0, 100, 1), "nutrisi_b")
-        self.ketinggianAir = ctrl.Antecedent(np.arange(0, 13, 1), "ketinggian_air")
+        self.ketinggianAir = ctrl.Antecedent(np.arange(10, 20, 1), "ketinggian_air")
         self.pompa_nutrisi = ctrl.Consequent(np.arange(0, 2, 1), "pompa_nutrisi")
         self.pompa_sirkulasi = ctrl.Consequent(np.arange(0, 2, 1), "pompa_sirkulasi")
         self.pompa_airbaku = ctrl.Consequent(np.arange(0, 2, 1), "pompa_airbaku")
@@ -251,26 +251,26 @@ class Selada:
     def getKetinggianAir(self, input):
         # Definisikan range ketinggian air
         self.ketinggianAir["rendah"] = fuzz.trapmf(
-            self.ketinggianAir.universe, [7, 9, 13, 13]
-        )
-        self.ketinggianAir["optimal"] = fuzz.trapmf(
-            self.ketinggianAir.universe, [4, 6, 6, 8]
+            self.ketinggianAir.universe, [16, 19, 20, 20]
         )
         self.ketinggianAir["tinggi"] = fuzz.trapmf(
-            self.ketinggianAir.universe, [0, 0, 3, 5]
+            self.ketinggianAir.universe, [10, 10, 11, 14]
+        )
+        self.ketinggianAir["optimal"] = fuzz.trapmf(
+            self.ketinggianAir.universe, [13, 15, 15, 17]
         )
 
         self.KategoriKetinggianAir = ctrl.Consequent(
-            np.arange(0, 13, 1), "kategori_ketinggian_air"
-        )
-        self.KategoriKetinggianAir["rendah"] = fuzz.trapmf(
-            self.KategoriKetinggianAir.universe, [0, 0, 2, 4]
-        )
-        self.KategoriKetinggianAir["normal"] = fuzz.trapmf(
-            self.KategoriKetinggianAir.universe, [3, 5, 5, 7]
+            np.arange(10, 20, 1), "kategori_ketinggian_air"
         )
         self.KategoriKetinggianAir["tinggi"] = fuzz.trapmf(
-            self.KategoriKetinggianAir.universe, [6, 8, 10, 13]
+            self.KategoriKetinggianAir.universe, [16, 19, 20, 20]
+        )
+        self.KategoriKetinggianAir["normal"] = fuzz.trapmf(
+            self.KategoriKetinggianAir.universe, [13, 15, 15, 17]
+        )
+        self.KategoriKetinggianAir["rendah"] = fuzz.trapmf(
+            self.KategoriKetinggianAir.universe, [10, 10, 11, 14]
         )
 
         # Aturan fuzzy untuk kategori ketinggian air
@@ -516,7 +516,6 @@ class NFTFuzzyControl:
             return "Error in computation. Please check input values."
 
 
-
 app = Flask(__name__)
 selada = Selada()
 controller = NFTFuzzyControl()
@@ -589,6 +588,7 @@ def get_status():
             "status_suhu": status_suhu,
             "status_kelembaban": status_kelembaban,
             "status_ketinggian_air": status_ketinggian_air,
+            "umur": umur,
         }
     )
     return jsonify(processed_data)
