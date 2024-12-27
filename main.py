@@ -320,7 +320,7 @@ class NFTFuzzyControl:
     def _setup_variables(self):
         self.umur = ctrl.Antecedent(np.arange(0, 46, 1), "umur")
         self.ppm = ctrl.Antecedent(np.arange(0, 1501, 1), "ppm")
-        self.ketinggian_air = ctrl.Antecedent(np.arange(0, 14, 1), "ketinggian_air")
+        self.ketinggian_air = ctrl.Antecedent(np.arange(10, 20, 1), "ketinggian_air")
 
         self.pompa_sirkulasi = ctrl.Consequent(np.arange(0, 2, 1), "pompa_sirkulasi")
         self.pompa_airbaku = ctrl.Consequent(np.arange(0, 2, 1), "pompa_airbaku")
@@ -334,13 +334,13 @@ class NFTFuzzyControl:
 
         # Water level membership
         self.ketinggian_air["rendah"] = fuzz.trapmf(
-            self.ketinggian_air.universe, [7, 11, 13, 13]
+            self.ketinggian_air.universe, [16, 19, 20, 20]
         )
         self.ketinggian_air["sedang"] = fuzz.trapmf(
-            self.ketinggian_air.universe, [4, 6, 6, 8]
+            self.ketinggian_air.universe, [13, 15, 15, 17]
         )
         self.ketinggian_air["tinggi"] = fuzz.trapmf(
-            self.ketinggian_air.universe, [0, 0, 2, 5]
+            self.ketinggian_air.universe, [10, 10, 11, 14]
         )
 
         # Pump outputs
